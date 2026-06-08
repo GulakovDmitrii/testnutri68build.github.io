@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Здоровое питание</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h2>Visit Site</h2>
+            </div>
+
+            <!-- Бургер-меню для мобильных -->
+            <div class="burger" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav class="nav" id="navMenu">
+                <a href="#" class="nav-link">Главная</a>
+                <div class="dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">О нас <span class="arrow">▼</span></a>
+                    <div class="dropdown-menu">
+                        <a href="#">О нас</a>
+                        <a href="services.html">Услуги</a>
+                        <a href="#">Блог</a>
+                        <a href="#">Контакты</a>
+                    </div>
+                </div>
+                <a href="#" class="nav-link">О нас</a>
+                <a href="services.html" class="nav-link">Услуги</a>
+                <a href="#" class="nav-link">Блог</a>
+                <a href="#" class="nav-link">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Главный баннер -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Здоровое питание — это просто</h1>
+                <p>Персональные программы питания для достижения ваших целей</p>
+                <button class="btn">Узнать больше</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- О нас -->
+    <section class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>О нашей компании</h2>
+                    <p>Мы помогаем людям обрести гармонию с телом через осознанное питание. Наши нутрициологи создают индивидуальные программы, учитывая ваши особенности и цели.</p>
+                    <button class="btn btn-outline">Подробнее</button>
+                </div>
+                <div class="about-image">
+                    <img src="img/about-img.jpg" alt="Нутрициолог">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+<section class="about" id="about">
+    <div class="container">
+        <h2 class="section-title">О нас</h2>
+        <p class="about-description">
+            Мы — команда профессионалов в области здорового питания и нутрициологии.
+            Наша миссия — помочь каждому найти свой путь к здоровому образу жизни через
+            сбалансированное питание и осознанный подход к выбору продуктов.
+        </p>
+
+        <!-- Галерея изображений -->
+        <div class="image-gallery">
+            <div class="gallery-container">
+                    <!-- Кнопки навигации -->
+                <button class="gallery-btn prev" id="prevBtn">←</button>
+                <button class="gallery-btn next" id="nextBtn">→</button>
+
+                <div class="gallery-track" id="galleryTrack">
+                    <img src="img/about-1.jpg" alt="Команда нутрициологов" class="gallery-item">
+            <img src="img/about-2.jpg" alt="Консультация клиента" class="gallery-item">
+            <img src="img/about-3.jpg" alt="Работа в лаборатории" class="gallery-item">
+            <img src="img/about-4.jpg" alt="Семинар по питанию" class="gallery-item">
+            <img src="img/about-5.jpg" alt="Здоровые продукты" class="gallery-item">
+        </div>
+    </div>
+</div>
+
+<!-- Индикаторы -->
+<div class="gallery-indicators" id="indicatorsContainer">
+    <!-- Индикаторы будут созданы динамически -->
+</div>
+</div>
+</section>
+
+    <!-- Услуги -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Наши услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Персональное консультирование</h3>
+                    <p>Индивидуальные консультации с нутрициологом</p>
+                </div>
+                <div class="service-card">
+                    <h3>Программы питания</h3>
+                    <p>Готовые планы питания на месяц</p>
+                </div>
+                <div class="service-card">
+                    <h3>Обучение</h3>
+                    <p>Онлайн-курсы по здоровому питанию</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Плавающая кнопка "Наверх" -->
+<button class="scroll-to-top" id="scrollTopBtn" title="Наверх страницы">
+    ↑
+</button>
+
+
+    <!-- Плавающая кнопка чата -->
+<div class="chat-floating-btn" id="chatBtn">
+    <div class="chat-icon">💬</div>
+    <span class="chat-label">Чат с нами</span>
+</div>
+
+<!-- Всплывающее меню чата -->
+<div class="chat-popup" id="chatPopup">
+    <div class="chat-header">
+        <h3>Как с нами связаться?</h3>
+        <button class="close-popup" id="closeChat">&times;</button>
+    </div>
+    <div class="chat-options">
+        <a href="#" class="chat-option whatsapp">
+            <span>📱 WhatsApp</span>
+            <span class="arrow">→</span>
+        </a>
+        <a href="#" class="chat-option telegram">
+            <span>✈️ Telegram</span>
+            <span class="arrow">→</span>
+        </a>
+        <a href="#" class="chat-option email">
+            <span>✉️ Email</span>
+            <span class="arrow">→</span>
+        </a>
+        <a href="#" class="chat-option callback">
+            <span>📞 Заказать звонок</span>
+            <span class="arrow">→</span>
+        </a>
+    </div>
+</div>
+
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Visit Site. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
