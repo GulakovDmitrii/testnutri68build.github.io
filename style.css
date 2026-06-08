@@ -349,8 +349,9 @@ body {
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 100vw) {
     .container {
+        margin: 0 auto;
         padding: 0 0px; /* Убираем боковые отступы на очень маленьких экранах */
     }
 
