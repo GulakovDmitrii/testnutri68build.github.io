@@ -9,14 +9,14 @@
 }
 
 @font-face {
-    font-family: kamerik-3d;
-    src: url(../testnutri68build.github.io/fonts/kamerik205-heavy.woff2);
+    font-family: kamerik-3d, sans-serif;
+    src: url('fonts\kamerik205-heavy.woff2');
     font-weight: 900;
 }
 
 @font-face {
     font-family: marriweather-3d;
-    src: url(../testnutri68build.github.io/fonts/merriweather-regular-italic.woff2);
+    src: url('fonts\merriweather-regular-italic.woff2');
     font-weight: 900;
 }
 
@@ -27,27 +27,107 @@ body {
 }
 
 .logo {
-    width: 150px;
-    height: 150px;
+    width: var(--index);
+    height: var(--index);
     background-repeat: no-repeat;
+    position: absolute;
+    left: 40%;
+    top: 10%;
+    z-index: 1;
 }
 
 .layers {
-    perspective: 1000px;
+    perspective: 800px;
+    overflow: hidden;
 }
 
 .layers__container {
     height: 100vh;
     transform-style: preserve-3d;
+    transform: rotateX(var(--mouse-y)) rotateY(var(--mouse-x));
+    min-height: 500px;
+    will-change: transform;
+    transition: transform var(--transition);
 }
 
 .layers__item {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: -5vw;
     background-size: cover;
-    background-position: center center;
-    transform: rotateX(var(--mouse-x)) rotateY(var(--mouse-y));
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.layer-1 {
+    transform: translateZ(-55px) scale(1.3);
+}
+.layer-2 {
+    transform: translateZ(80px) sacale(.88);
+}
+.layer-3 {
+    transform: translateZ(100px) scale(.8);
+}
+.layer-4 {
+    transform: translateZ(190px) scale(.9);
+}
+.layer-5 {
+    transform: translateZ(300px) scale(.9);
+}
+.layer-6 {
+    transform: translateZ(380px);
+}
+
+.hero-content {
+    font-size: calc(var(--index) * 2);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: calc(var(--index) * -.15);
+    line-height: .9;
+    margin-top:  calc(var(--index) * 5);
+}
+
+.hero-content h1 {
+    pointer-events: none;
+    font-family: 'Monserrat', sans-serif;
+    text-transform: uppercase;
+    text-shadow: 
+    0 0 5px rgba(0, 0, 0, 0.3),
+    0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.hero-content span {
+    display: block;
+}
+
+.hero-content__p {
+    text-transform:  none;
+    font-family:'Monserrat', sans-serif;
+    font-weight: 400;
+    letter-spacing: normal;
+    font-size: calc(var(--index) * 1.3);
+    line-height:  3;
+    opacity: .9;
+}
+
+.btn-start {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: calc(var(--index) * .71);
+    letter-spacing: -.02vw;
+    padding: calc(var(--index) * .7) calc(var(--index) * 1.25);
+    background-color: transparent;
+    color: aliceblue;
+    border-radius: 10em;
+    border:rgb(255, 255, 255/.4) 3px solid;
+    outline: none;
+    cursor: pointer;
+    transition: all .5s;
+}
+
+.layer-4, .layer-5, .layer-6 {
+    pointer-events: none;
 }
