@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --index: calc(1vw + 1vh);
+    --transition: 1s cubic-bezier(.05, .5, 0, 1);
+}
+
+@font-face {
+    font-family: kamerik-3d;
+    src: url(fonts/kamerik205-heavy.woff2);
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: marriweather-3d;
+    src: url(/fonts/merriweather-regular-italic.woff2);
+    font-weight: 900;
+}
+
+body {
+    background-color: black;
+    color:rgb(141, 196, 46);
+    font-family: kamerik-3d;
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+    background-repeat: no-repeat;
+}
+
+.layers {
+    perspective: 1000px;;
+}
+
+.layers__container {
+    height: 10vh;
+    transform-style: preserve-3d;
+}
+
+.layers__item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center center;
+    transform: rotateX(var(--mouse-x)) rotateY(var(--mouse-y));
+}
