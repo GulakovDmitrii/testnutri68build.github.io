@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleDeviceOrientation(event) {
         calibrate(event);
 
-        const beta = (event.beta || 0) - calibration.gamma; // Наклон вперёд/назад
-        const gamma = (event.gamma || 0) - calibration.beta; // Наклон влево/вправо
+        const beta = (event.beta || 0) - calibration.beta; // Наклон вперёд/назад
+        const gamma = (event.gamma || 0) - calibration.gamma; // Наклон влево/вправо
 
         // Ограничиваем диапазон наклона (макс. 45 deg в каждую сторону)
         const maxTilt = 45;
@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const clampedGamma = Math.max(-maxTilt, Math.min(maxTilt, gamma));
 
         // Преобразуем в градусы для CSS-переменных (макс. ±6 deg)
-        const mouseX = (clampedBeta / maxTilt) * 6;
-        const mouseY = (clampedGamma / maxTilt) * 6;
+        const mouseY = (clampedBeta / maxTilt) * 6;
+        const mouseX = (clampedGamma / maxTilt) * 6;
 
         updateCSSVariables(mouseX, mouseY);
     }
