@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleDeviceOrientation(event) {
         calibrate(event);
 
-        const beta = (event.beta || 0) - calibration.beta; // Наклон вперёд/назад
-        const gamma = (event.gamma || 0) - calibration.gamma; // Наклон влево/вправо
+        const beta = (event.beta || 0) - calibration.gamma; // Наклон вперёд/назад
+        const gamma = (event.gamma || 0) - calibration.beta; // Наклон влево/вправо
 
         // Ограничиваем диапазон наклона (макс. 45 deg в каждую сторону)
         const maxTilt = 45;
