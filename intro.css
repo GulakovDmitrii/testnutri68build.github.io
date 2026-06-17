@@ -10,19 +10,19 @@
 
 @font-face {
     font-family: kamerik-3d;
-    src: url(fonts/kamerik205-heavy.woff2);
+    src: url(../testnutri68build.github.io/fonts/kamerik205-heavy.woff2);
     font-weight: 900;
 }
 
 @font-face {
     font-family: marriweather-3d;
-    src: url(/fonts/merriweather-regular-italic.woff2);
+    src: url(../testnutri68build.github.io/fonts/merriweather-regular-italic.woff2);
     font-weight: 900;
 }
 
 body {
-    background-color: black;
-    color:rgb(141, 196, 46);
+    background-color: rgb(255, 255, 255);
+    color:rgb(144, 177, 88);
     font-family: kamerik-3d;
 }
 
@@ -33,11 +33,11 @@ body {
 }
 
 .layers {
-    perspective: 1000px;;
+    perspective: 1000px;
 }
 
 .layers__container {
-    height: 10vh;
+    height: 100vh;
     transform-style: preserve-3d;
 }
 
