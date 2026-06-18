@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const clampedGamma = Math.max(-maxTilt, Math.min(maxTilt, gamma));
 
         // Преобразуем в градусы для CSS-переменных (макс. ±6 deg)
-        const mouseX = -(clampedBeta / maxTilt) * 6;
-        const mouseY = -(clampedGamma / maxTilt) * 6;
+        const mouseY = -(clampedBeta / maxTilt) * 6;
+        const mouseX = -(clampedGamma / maxTilt) * 6;
 
         updateCSSVariables(mouseX, mouseY);
     }
