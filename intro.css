@@ -48,7 +48,6 @@ body {
     min-height: 500px;
     will-change: transform;
     transition: transform var(--transition);
-
 }
 
 .layers__item {

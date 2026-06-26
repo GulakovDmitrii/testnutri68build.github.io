@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Обработка движения мыши (для десктопа)
     function handleMouseMove(e) {
         const mouseX = (e.clientX - window.innerWidth / 2) * -0.01;
-        const mouseY = (e.clientY - window.innerHeight / 2) * -0.01;
+        const mouseY = (e.clientY - window.innerHeight / 2) * 0.01;
 
         updateCSSVariables(mouseX, mouseY);
     }
