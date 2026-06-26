@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         updateCSSVariables(mouseY, mouseX);
 
-        console.log('Raw: Beta=${rawBeta}, Gamma=${rawGamma}, Calib: Be=${calibration.gamma}, G=${calibration.beta}, Clamped: Beta=${clampedBeta}, Gamma=${clampedGamma}, Mouse Y=${mouseY}, Mouse X=${ta=${calibration.beta}, GammamouseX}');
+        console.log('Raw: Beta= rawBeta, Gamma=${rawGamma}, Calib: Be=${calibration.gamma}, G=${calibration.beta}, Clamped: Beta=${clampedBeta}, Gamma=${clampedGamma}, Mouse Y=${mouseY}, Mouse X=${ta=${calibration.beta}, GammamouseX}');
     }
 
     // Обработка движения мыши (для десктопа)
