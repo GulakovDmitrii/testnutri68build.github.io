@@ -44,7 +44,7 @@ body {
 .layers__container {
     height: 100vh;
     transform-style: preserve-3d;
-    transform: rotateX(var(--mouse-y)) rotateY(var(--mouse-x));
+    transform: rotateX(var(--mouse-y) * -1) rotateY(var(--mouse-x));
     min-height: 500px;
     will-change: transform;
     transition: transform var(--transition);
