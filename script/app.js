@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Единая функция обновления CSS‑переменных
     function updateCSSVariables(x, y) {
-        document.documentElement.style.setProperty('--mouse-x', `${x}deg`);
+        document.documentElement.style.setProperty('--mouse-x', `${-x}deg`);
         document.documentElement.style.setProperty('--mouse-y', `${y}deg`);
     }
 
