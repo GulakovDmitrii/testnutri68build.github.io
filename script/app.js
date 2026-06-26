@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const mouseY = -(clampedBeta / maxTilt) * 6;
         const mouseX = -(clampedGamma / maxTilt) * 6;
 
-        updateCSSVariables(mouseY, mouseX);
+        updateCSSVariables(mouseX, mouseY);
     }
 
     // Обработка движения мыши (для десктопа)
