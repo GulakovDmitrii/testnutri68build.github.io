@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Функция калибровки (первый наклон = нейтральное положение)
     function calibrate(event) {
-        if (!isCalibrated) {
+        if (!isCalibrated && event) {
             calibration = {
                 beta: event.beta || 0,
                 gamma: event.gamma || 0
@@ -16,10 +16,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Обработка наклона устройства
     function handleDeviceOrientation(event) {
-        calibrate(event);
+        if (!isCalibrated){
+            calibrate(event);
+        }
 
         const beta = (event.beta || 0) - calibration.beta; // Наклон вперёд/назад
         const gamma = (event.gamma || 0) - calibration.gamma; // Наклон влево/вправо
+
+        
+        const isLandscape = window.innerWidth > window.innerHeight;
+
+        if(isLandscape) {
+            const temp = beta;
+            beta = gamma;
+            gamma = -temp;
+        }
 
         // Ограничиваем диапазон наклона (макс. 45 deg в каждую сторону)
         const maxTilt = 45;
@@ -51,6 +62,16 @@ document.addEventListener('DOMContentLoaded', function() {
     if ('DeviceOrientationEvent' in window) {
         window.addEventListener('deviceorientation', throttle(handleDeviceOrientation, 100));
         hasDeviceOrientation = true;
+        window.addEventListener('orientationchange', () => {
+            isCalibrated = false; // Сброс калибровки при повороте
+            console.log('Orientation changed, recalibrating...');
+        });
+        window.addEventListener('resize', () => {
+            // Проверка на переход в ландшафт/портрет
+            if((window.innerHeight > window.innerWidth) !== (window.innerHeight <= window.innerWidth)) {
+                 isCalibrated = false; 
+            }
+        });
     }
 
     // Подключаем обработчик мыши
