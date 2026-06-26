@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function calibrate(event) {
         if (!isCalibrated) {
             calibration = {
-                beta: event.gamma || 0,
-                gamma: event.beta || 0
+                beta: event.beta || 0,
+                gamma: event.gamma || 0
             };
             isCalibrated = true;
         }
@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleDeviceOrientation(event) {
         calibrate(event);
 
-        const beta = (event.gamma || 0) - calibration.gamma; // Наклон вперёд/назад
-        const gamma = (event.beta || 0) - calibration.beta; // Наклон влево/вправо
+        const beta = (event.beta || 0) - calibration.beta; // Наклон вперёд/назад
+        const gamma = (event.gamma || 0) - calibration.gamma; // Наклон влево/вправо
 
         // Ограничиваем диапазон наклона (макс. 45 deg в каждую сторону)
         const maxTilt = 45;
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const mouseY = -(clampedBeta / maxTilt) * 6;
         const mouseX = -(clampedGamma / maxTilt) * 6;
 
-        updateCSSVariables(mouseX, mouseY);
+        updateCSSVariables(mouseY, mouseX);
     }
 
     // Обработка движения мыши (для десктопа)
