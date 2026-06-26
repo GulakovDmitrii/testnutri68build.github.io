@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const rawBeta = event.beta === null ? 0 : event.beta;
         const rawGamma = event.gamma === null ? 0 : event.gamma;
 
-        let gamma = rawBeta - calibration.beta; // Наклон вперёд/назад
-        let beta = rawGamma - calibration.gamma; // Наклон влево/вправо
+        let beta = rawBeta - calibration.beta; // Наклон вперёд/назад
+        let gamma = rawGamma - calibration.gamma; // Наклон влево/вправо
 
         
         const isLandscape = window.innerWidth > window.innerHeight;
