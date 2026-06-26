@@ -44,10 +44,12 @@ body {
 .layers__container {
     height: 100vh;
     transform-style: preserve-3d;
-    transform: rotateX(var(--mouse-y)) rotateY(var(--mouse-x));
+    transform: 
+    rotateX(calc(var(--tilt-y, 0deg) * -1)) 
+    rotateY(calc(var(--tilt-x, 0deg)));
     min-height: 500px;
     will-change: transform;
-    transition: transform var(--transition);
+    transition: transform 0.1s ease-out; /* Плавность */
 }
 
 .layers__item {
