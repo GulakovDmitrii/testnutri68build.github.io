@@ -45,6 +45,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const mouseX = -(clampedBeta / maxTilt) * 6;
 
         updateCSSVariables(mouseY, mouseX);
+
+        console.log('Raw: Beta=${rawBeta}, Gamma=${rawGamma}, Calib: Be=${calibration.gamma}, G=${calibration.beta}, Clamped: Beta=${clampedBeta}, Gamma=${clampedGamma}, Mouse Y=${mouseY}, Mouse X=${ta=${calibration.beta}, GammamouseX}');
     }
 
     // Обработка движения мыши (для десктопа)
