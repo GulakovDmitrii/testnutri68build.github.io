@@ -20,8 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
             calibrate(event);
         }
 
-        const beta = (event.beta || 0) - calibration.beta; // Наклон вперёд/назад
-        const gamma = (event.gamma || 0) - calibration.gamma; // Наклон влево/вправо
+        const rawBeta = event.beta === null ? 0 : event.beta;
+        const rawGamma = event.gamma === null ? 0 : event.gamma;
+
+        let beta = rawBeta - calibration.beta; // Наклон вперёд/назад
+        let gamma = rawGamma - calibration.gamma; // Наклон влево/вправо
 
         
         const isLandscape = window.innerWidth > window.innerHeight;
