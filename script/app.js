@@ -1,67 +1,94 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let hasDeviceOrientation = false;
-    let calibration = { beta: 0, gamma: 0 };
     let isCalibrated = false;
-
-    // Функция калибровки (первый наклон = нейтральное положение)
+    let calibration = { beta: 0, gamma: 0 };
+    
+    // 1. Функция калибровки (вызывается один раз при первом наклоне или по кнопке)
     function calibrate(event) {
-        if (!isCalibrated) {
+        if (!isCalibrated && event) {
             calibration = {
-                beta: event.gamma || 0,
-                gamma: event.beta || 0
+                beta: event.beta || 0,
+                gamma: event.gamma || 0
             };
             isCalibrated = true;
+            console.log('Device calibrated');
         }
     }
 
-    // Обработка наклона устройства
     function handleDeviceOrientation(event) {
-        calibrate(event);
+        // Если еще не откалибровано, калибруем прямо сейчас (первый кадр)
+        if (!isCalibrated) {
+            calibrate(event);
+        }
 
-        const beta = (event.gamma || 0) - calibration.gamma; // Наклон вперёд/назад
-        const gamma = (event.beta || 0) - calibration.beta; // Наклон влево/вправо
+        const rawBeta = event.beta !== null ? event.beta : 0;
+        const rawGamma = event.gamma !== null ? event.gamma : 0;
 
-        // Ограничиваем диапазон наклона (макс. 45 deg в каждую сторону)
+        // Вычитаем калибровочные значения
+        let beta = rawBeta - calibration.beta;
+        let gamma = rawGamma - calibration.gamma;
+
+        // 2. Коррекция под ориентацию экрана
+        // В портретной ориентации: gamma = X, beta = Y
+        // В ландшафтной ориентации оси часто меняются местами или инвертируются в зависимости от браузера.
+        // Самый надежный способ - определить ориентацию и применить поправку.
+        const isLandscape = window.innerHeight < window.innerWidth;
+
+        if (isLandscape) {
+            // В ландшафте оси часто нужно поменять местами или инвертировать одну из них
+            // Пробуй этот вариант, если текст все еще едет не туда:
+            const temp = beta;
+            beta = gamma;
+            gamma = -temp; 
+        }
+
+        // Ограничиваем диапазон (чтобы не было резких скачков)
         const maxTilt = 45;
+        
+        // Clamp значения
         const clampedBeta = Math.max(-maxTilt, Math.min(maxTilt, beta));
         const clampedGamma = Math.max(-maxTilt, Math.min(maxTilt, gamma));
 
-        // Преобразуем в градусы для CSS-переменных (макс. ±6 deg)
-        const mouseY = -(clampedBeta / maxTilt) * 6;
-        const mouseX = -(clampedGamma / maxTilt) * 6;
+        // Расчет углов для CSS
+        // Коэффициент 0.133 примерно равен 6/45. Подбирай под свой дизайн.
+        const moveY = -(clampedBeta / maxTilt) * 6; 
+        const moveX = (clampedGamma / maxTilt) * 6;
 
-        updateCSSVariables(mouseX, mouseY);
+        updateCSSVariables(moveX, moveY);
     }
 
-    // Обработка движения мыши (для десктопа)
-    function handleMouseMove(e) {
-        const mouseX = (e.clientX - window.innerWidth / 2) * -0.01;
-        const mouseY = (e.clientY - window.innerHeight / 2) * -0.01;
-
-        updateCSSVariables(mouseX, mouseY);
-    }
-
-    // Единая функция обновления CSS‑переменных
     function updateCSSVariables(x, y) {
-        document.documentElement.style.setProperty('--mouse-x', `${x}deg`);
-        document.documentElement.style.setProperty('--mouse-y', `${y}deg`);
+        document.documentElement.style.setProperty('--tilt-x', `${x}deg`);
+        document.documentElement.style.setProperty('--tilt-y', `${y}deg`);
     }
 
-    // Проверяем поддержку Device Orientation API
+    // Обработка мыши (Desktop)
+    function handleMouseMove(e) {
+        const rect = e.target.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width * 2 - 1) * 5; // -5 до 5
+        const y = ((e.clientY - rect.top) / rect.height * 2 - 1) * 5;
+        
+        updateCSSVariables(x, -y); // Инвертируем Y для мыши, чтобы соответствовало наклону
+    }
+
     if ('DeviceOrientationEvent' in window) {
+        // Используем throttle для производительности
         window.addEventListener('deviceorientation', throttle(handleDeviceOrientation, 100));
-        hasDeviceOrientation = true;
-    }
-
-    // Подключаем обработчик мыши
-    document.addEventListener('mousemove', throttle(handleMouseMove, 50));
-
-    // Отключаем mousemove на мобильных при касании экрана
-    if (hasDeviceOrientation) {
-        document.addEventListener('touchstart', () => {
-            document.removeEventListener('mousemove', handleMouseMove);
+        
+        // ВАЖНО: Перекалибровать при смене ориентации экрана
+        window.addEventListener('orientationchange', () => {
+            isCalibrated = false; // Сброс калибровки при повороте
+            console.log('Orientation changed, recalibrating...');
+        });
+        
+        window.addEventListener('resize', () => {
+             // Проверка на переход в ландшафт/портрет
+             if((window.innerHeight > window.innerWidth) !== (window.innerHeight <= window.innerWidth)) {
+                 isCalibrated = false; 
+             }
         });
     }
+
+    document.addEventListener('mousemove', throttle(handleMouseMove, 50));
 });
 
 function throttle(func, limit) {
@@ -74,25 +101,3 @@ function throttle(func, limit) {
         }
     };
 }
-
-if (typeof DeviceMotionEvent.requestPermission === 'function') {
-    const enableMotionBtn = document.getElementById('enableMotion');
-    enableMotionBtn.style.display = 'block';
-
-    enableMotionBtn.addEventListener('click', () => {
-        DeviceMotionEvent.requestPermission()
-            .then(permissionState => {
-                if (permissionState === 'granted') {
-                    window.addEventListener('deviceorientation', handleDeviceOrientation);
-                    enableMotionBtn.style.display = 'none';
-                }
-            })
-            .catch(console.error);
-    });
-}
-
-const btnStart = document.querySelector('.btn-start');
-
-btnStart.addEventListener('click', () => {
-    window.location.href = 'index.html';
-});
