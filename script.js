@@ -184,6 +184,26 @@ prevBtn.addEventListener('click', prevSlide);
 // Инициализация
 createIndicators();
 
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.header-container');
+    const body = document.body;
+    const headerHeight = document.querySelector('.header').offsetHeight;
+    
+    // Точка, после которой фиксируем (обычно это высота хедера)
+    const scrollThreshold = headerHeight; 
+
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY || window.pageYOffset;
+
+        if (pageYOffset >= 300) {
+            container.classList.add('is-fixed');
+        } else {
+            container.classList.remove('is-fixed');
+        }
+    });
+});
+
+
 // Элементы кнопки "На главную"
 const backToHomeBtn = document.getElementById('backToHomeBtn');
 
@@ -200,6 +220,8 @@ window.addEventListener('scroll', () => {
 backToHomeBtn.addEventListener('click', () => {
     window.location.href = 'index.html';
 });
+
+
 
 
 // Дополнительно: автоматическая прокрутка каждые 5 секунд (опционально)
